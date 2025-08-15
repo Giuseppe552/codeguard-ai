@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CodeGuard AI — Client-side Secure Scan</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' d='M12 2l7 4v6c0 5-3.5 9-7 10c-3.5-1-7-5-7-10V6l7-4z'/%3E%3Cpath fill='%2300d084' d='M12 6l4 2v4c0 3-2 6-4 7c-2-1-4-4-4-7V8l4-2z'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <div class="logo">🛡️</div>
+      <div>
+        <h1>CodeGuard <span>AI</span></h1>
+        <p class="muted">Paste a snippet. Get a risk score, findings, and fix tips — all offline.</p>
+      </div>
+    </div>
+    <div class="toolbar">
+      <button id="copyReport" class="ghost">Copy JSON</button>
+      <button id="downloadReport" class="ghost">Download report</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <div class="row">
+        <div class="column">
+          <label class="label" for="pasteArea">Code to analyze</label>
+          <textarea id="pasteArea" placeholder="Paste a small JS or Python file here to scan…"></textarea>
+          <div class="actions">
+            <div id="examples" class="examples">
+              <button data-ex="xss" class="chip">JS XSS</button>
+              <button data-ex="secrets" class="chip">JS Secrets</button>
+              <button data-ex="python" class="chip">Python risky</button>
+            </div>
+            <button id="scanPaste" class="primary">Scan Pasted Code</button>
+          </div>
+        </div>
+        <div class="column">
+          <div class="meter">
+            <div id="meterFill" class="meter-fill" style="width:0%"></div>
+          </div>
+          <div class="meta">
+            <div id="meterScore" class="score">0/100</div>
+            <div id="summary" class="summary">0 High • 0 Medium • 0 Low</div>
+          </div>
+          <div id="output" class="output"></div>
+          <details class="muted more">
+            <summary>What we check</summary>
+            <ul>
+              <li>XSS sinks (innerHTML, document.write), dangerous DOM patterns</li>
+              <li>JS: eval, new Function, child_process*</li>
+              <li>Python: os.system / subprocess shell=True, pickle, yaml.load</li>
+              <li>Secrets: API keys, tokens, passwords in code</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      Built with HTML/CSS/JS • No libraries • by <a href="https://github.com/Giuseppe552" target="_blank" rel="noreferrer">Giuseppe</a>
+    </footer>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
+
